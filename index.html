@@ -30,27 +30,62 @@
     .header-title { text-align: center; flex-grow: 1; }
     .header-title h2 { margin: 0; text-transform: uppercase; font-size: 18px; font-weight: bold; letter-spacing: 0.5px; }
     
-    /* Photo Box */
-    .photo-box-container { text-align: center; width: 35mm; }
+    /* Photo Box Container */
+    .photo-box-container { 
+      text-align: center; 
+      width: 35mm; 
+    }
     .photo-box { 
       width: 35mm; 
       height: 42mm; 
       border: 1.5px dashed #444; 
       display: flex; 
+      flex-direction: column;
       align-items: center; 
       justify-content: center; 
       background: #fafafa; 
       overflow: hidden; 
-      margin-bottom: 3px;
       position: relative;
+      padding: 4px;
     }
     .photo-box img { 
       width: 100%; 
       height: 100%; 
       object-fit: contain; 
       background-color: #f0f0f0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
     }
-    .photo-box span { font-size: 10px; color: #555; text-align: center; padding: 2px; }
+    .photo-box span { 
+      font-size: 10px; 
+      color: #555; 
+      text-align: center; 
+      padding: 2px; 
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    /* Only show button, hide "No file chosen" / file name text */
+    .photo-box input[type="file"] { 
+      width: 85px; /* Shows button only */
+      height: 25px;
+      overflow: hidden;
+      font-size: 10px;
+      cursor: pointer;
+      color: transparent; /* Extra safety for hiding native text */
+    }
+
+    /* Section Separator Line with Proper Spacing */
+    .section-divider {
+      border: none;
+      height: 3px;
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+      margin: 20px 0 16px 0;
+      background: transparent;
+    }
 
     /* Form Grid Layout */
     .grid { 
@@ -117,13 +152,20 @@
     }
     .phone-input-group input { border-radius: 0 2px 2px 0; }
 
-    /* Tables Layout */
-    .table-header-container { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; margin-bottom: 6px; }
-    .table-header-container h3 { margin: 0; text-transform: uppercase; font-size: 13px; color: #1f497d; font-weight: bold; }
+    /* Tables Layout & Prominent Headings */
+    .table-header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .table-header-container h3 { 
+      margin: 0; 
+      text-transform: uppercase; 
+      font-size: 14px; 
+      color: #000; 
+      font-weight: 800; 
+      letter-spacing: 0.5px;
+    }
 
     table { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
     th, td { border: 1px solid #000; padding: 4px 5px; vertical-align: middle; }
-    th { background-color: #e9ecef; font-size: 12px; font-weight: bold; text-transform: uppercase; text-align: center; }
+    th { background-color: #e9ecef; font-size: 12px; font-weight: bold; text-transform: uppercase; text-align: center; color: #000; }
     
     /* Table Input Alignment */
     td input[type="text"] { text-align: left; width: 100%; }
@@ -142,7 +184,7 @@
       display: flex; 
       justify-content: space-between; 
       align-items: flex-end; 
-      margin-top: 35px; 
+      margin-top: 25px; 
       padding: 0 10px; 
       position: relative;
     }
@@ -153,6 +195,7 @@
       font-weight: bold; 
       text-decoration: underline; 
       font-size: 12px; 
+      margin-top: 35px; /* Added top margin to move it down with space above */
     }
     .indiv-sig { 
       width: 33%; 
@@ -236,8 +279,8 @@
       <div class="photo-box-container">
         <div class="photo-box" id="photo-preview">
           <span>Paste 01 x Passport Size Photo</span>
+          <input type="file" id="photo-upload" accept="image/*" class="no-print" onchange="previewImage(event)">
         </div>
-        <input type="file" id="photo-upload" accept="image/*" class="no-print" onchange="previewImage(event)" style="width: 100%; font-size: 9px;">
       </div>
     </div>
     
@@ -331,6 +374,9 @@
       <div class="field-group half-width"><label>Prof. Skills:*</label><input type="text" maxlength="50" required oninput="resetFieldError(this)"></div>
     </div>
 
+    <!-- Section Separator Line -->
+    <hr class="section-divider">
+
     <div class="table-header-container">
       <h3>Family Members Details</h3>
       <button type="button" class="btn-add no-print" onclick="addRow('family-tbody')">+ Add Row</button>
@@ -355,7 +401,10 @@
 
   <!-- PAGE 2 -->
   <div class="page">
-    <div class="table-header-container" style="margin-top: 0;">
+    <!-- Section Separator Line -->
+    <hr class="section-divider" style="margin-top: 0;">
+
+    <div class="table-header-container">
       <h3>In-Law (s) details</h3>
       <button type="button" class="btn-add no-print" onclick="addRow('inlaws-tbody')">+ Add Row</button>
     </div>
@@ -384,8 +433,8 @@
           <li><span class="bullet">b.</span><span>Nature of Job must be written i.e. operational duty or admin duty, (Mention Section/Branch as well).</span></li>
           <li><span class="bullet">c.</span><span>Information about deceased family member(s) must be mentioned with the date of expiry or death. (If Any)</span></li>
           <li><span class="bullet">d.</span><span>Indication of Next of Kin may also be made in the remark's column with contact number.</span></li>
-          <li><span class="bullet">e.</span><span>Mention if any family member if Serving in this Dept with Force Number and present station of posting.</span></li>
-          <li><span class="bullet">f.</span><span>In case of any family member is serving other than in this Dept (Department, appointment, present posting station) must be mentioned.</span></li>
+          <li><span class="bullet">e.</span><span>Mention if any family member if Serving in this with Force Number and present station of posting.</span></li>
+          <li><span class="bullet">f.</span><span>In case of any family member is serving other than this (Department, appointment, present posting station) must be mentioned.</span></li>
           <li><span class="bullet">g.</span><span>Attach neat & Clean (readable) photo copy of CNIC, Force card, last educational certificate. (Last degree along with mark sheet), <b>B. Form of children</b></span></li>
         </ul>
       </div>
@@ -452,7 +501,10 @@
     const reader = new FileReader();
     reader.onload = function() {
       const output = document.getElementById('photo-preview');
-      output.innerHTML = `<img src="${reader.result}" alt="Photo">`;
+      const img = document.createElement('img');
+      img.src = reader.result;
+      img.alt = "Photo";
+      output.appendChild(img);
     }
     if (event.target.files[0]) {
       reader.readAsDataURL(event.target.files[0]);
@@ -474,7 +526,6 @@
     event.preventDefault();
 
     const form = document.getElementById('proforma-form-wrapper');
-    // Only select elements that have the 'required' attribute
     const requiredInputsAndSelects = form.querySelectorAll('input[required]:not([type="file"]), select[required]');
     let isValid = true;
     let firstInvalidElement = null;
@@ -482,7 +533,7 @@
     // Reset previous errors
     form.querySelectorAll('input:not([type="file"]), select').forEach(el => el.classList.remove('input-error'));
 
-    // Validate only required inputs and selects
+    // Validate required fields
     requiredInputsAndSelects.forEach(el => {
       if (!el.value || el.value.trim() === "") {
         isValid = false;
@@ -510,7 +561,7 @@
       return false;
     }
 
-    // Trigger Print Dialog on Validation Success
+    // Trigger Print Dialog
     window.print();
   }
 
