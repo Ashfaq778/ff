@@ -7,34 +7,23 @@
     * { box-sizing: border-box; }
     body { font-family: Arial, sans-serif; background: #f4f4f9; margin: 0; padding: 20px 0; }
 
-    /* Page Setup - Exact Landscape A4 Dimensions */
-    .page {
+    /* Main Container for A4 Landscape Setup */
+    .form-container {
       width: 297mm;
-      min-height: 209mm;
-      margin: 0 auto 15mm auto;
+      margin: 0 auto;
       background: #fff;
       padding: 10mm 12mm;
       border: 1px solid #ccc;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      position: relative;
-      page-break-after: always;
-      page-break-inside: avoid;
-    }
-
-    .page:last-of-type {
-      page-break-after: auto;
     }
 
     /* Header Layout */
-    .header-section { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #000; padding-bottom: 6px; margin-bottom: 12px; }
+    .header-section { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #000; padding-bottom: 6px; margin-bottom: 14px; }
     .header-title { text-align: center; flex-grow: 1; }
-    .header-title h2 { margin: 0; text-transform: uppercase; font-size: 18px; font-weight: bold; letter-spacing: 0.5px; }
+    .header-title h2 { margin: 0; text-transform: uppercase; font-size: 20px; font-weight: bold; letter-spacing: 0.5px; }
     
     /* Photo Box Container */
-    .photo-box-container { 
-      text-align: center; 
-      width: 35mm; 
-    }
+    .photo-box-container { text-align: center; width: 35mm; }
     .photo-box { 
       width: 35mm; 
       height: 42mm; 
@@ -48,6 +37,10 @@
       position: relative;
       padding: 4px;
     }
+    .photo-box.input-error {
+      border: 2px dashed #dc3545 !important;
+      background-color: #fff8f8;
+    }
     .photo-box img { 
       width: 100%; 
       height: 100%; 
@@ -59,31 +52,30 @@
       z-index: 2;
     }
     .photo-box span { 
-      font-size: 10px; 
+      font-size: 11px; 
       color: #555; 
       text-align: center; 
       padding: 2px; 
-      line-height: 1.2;
+      line-height: 1.3;
       margin-bottom: 6px;
     }
 
-    /* Only show button, hide "No file chosen" / file name text */
     .photo-box input[type="file"] { 
-      width: 85px; /* Shows button only */
+      width: 85px;
       height: 25px;
       overflow: hidden;
-      font-size: 10px;
+      font-size: 11px;
       cursor: pointer;
-      color: transparent; /* Extra safety for hiding native text */
+      color: transparent;
     }
 
-    /* Section Separator Line with Proper Spacing */
+    /* Section Separator Line */
     .section-divider {
       border: none;
       height: 3px;
       border-top: 1px solid #000;
       border-bottom: 1px solid #000;
-      margin: 20px 0 16px 0;
+      margin: 16px 0 14px 0;
       background: transparent;
     }
 
@@ -96,7 +88,7 @@
     }
     .half-width { grid-column: span 2; }
 
-    /* Side-by-Side Field Styling with 12px Font */
+    /* Side-by-Side Field Styling */
     .field-group {
       display: flex;
       align-items: center;
@@ -106,23 +98,42 @@
     .field-group label {
       font-weight: bold;
       font-size: 12px;
-      text-transform: uppercase;
       color: #111;
       white-space: nowrap;
       flex-shrink: 0;
-      line-height: 1.3;
+      line-height: 1.4;
     }
 
+    /* Inputs, Selects, and Textareas Styling */
     .field-group input, 
     .field-group select { 
       width: 100%; 
       padding: 3px 6px; 
       border: 1px solid #000; 
       font-size: 12px; 
+      font-weight: bold;
+      text-decoration: underline;
       border-radius: 2px; 
-      height: 26px;
+      height: 28px;
       flex-grow: 1;
-      line-height: 1.3;
+      line-height: 1.4;
+    }
+
+    .field-group textarea {
+      width: 100%;
+      padding: 3px 6px;
+      border: 1px solid #000;
+      font-size: 12px;
+      font-weight: bold;
+      text-decoration: underline;
+      font-family: Arial, sans-serif;
+      border-radius: 2px;
+      min-height: 28px;
+      max-height: 52px;
+      flex-grow: 1;
+      line-height: 1.4;
+      resize: none;
+      overflow: auto;
     }
 
     /* Email Container */
@@ -134,17 +145,17 @@
 
     /* Error Validation States */
     .input-error { border: 1.5px solid #dc3545 !important; background-color: #fff8f8; }
-    .error-msg-text { color: #dc3545; font-size: 10px; font-weight: bold; display: none; margin-top: 2px; }
+    .error-msg-text { color: #dc3545; font-size: 11px; font-weight: bold; display: none; margin-top: 2px; }
 
     .phone-input-group { display: flex; align-items: center; width: 100%; }
     .phone-prefix {
       background: #e9ecef;
       border: 1px solid #000;
       border-right: none;
-      padding: 3px 5px;
+      padding: 3px 6px;
       font-size: 12px;
       font-weight: bold;
-      height: 26px;
+      height: 28px;
       display: flex;
       align-items: center;
       border-radius: 2px 0 0 2px;
@@ -152,31 +163,45 @@
     }
     .phone-input-group input { border-radius: 0 2px 2px 0; }
 
-    /* Tables Layout & Prominent Headings */
+    /* Tables Layout & Headings */
+    .table-section {
+      margin-top: 12px;
+      page-break-inside: auto;
+    }
+    
     .table-header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
     .table-header-container h3 { 
       margin: 0; 
-      text-transform: uppercase; 
       font-size: 14px; 
       color: #000; 
       font-weight: 800; 
       letter-spacing: 0.5px;
     }
 
-    table { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
-    th, td { border: 1px solid #000; padding: 4px 5px; vertical-align: middle; }
-    th { background-color: #e9ecef; font-size: 12px; font-weight: bold; text-transform: uppercase; text-align: center; color: #000; }
+    table { width: 100%; border-collapse: collapse; margin-top: 2px; font-size: 12px; }
+    th, td { border: 1px solid #000; padding: 5px 6px; vertical-align: middle; }
+    th { background-color: #e9ecef; font-size: 12px; font-weight: bold; text-align: center; color: #000; line-height: 1.3; }
     
     /* Table Input Alignment */
     td input[type="text"] { text-align: left; width: 100%; }
     td input[type="date"], td select { text-align: center; width: 100%; }
-    td input, td select { height: 24px; padding: 2px 4px; font-size: 12px; border: none; background: transparent; }
+    td input, td select { height: 26px; padding: 2px 4px; font-size: 12px; font-weight: bold; text-decoration: underline; border: none; background: transparent; line-height: 1.3; }
+
+    /* Keep Rows Together */
+    tr { page-break-inside: avoid; page-break-after: auto; }
 
     /* Note Section Styling */
-    .note-section { margin-top: 14px; font-size: 12px; line-height: 1.5; border-top: 1px solid #ddd; padding-top: 8px; }
+    .note-section { 
+      margin-top: 12px; 
+      font-size: 12px; 
+      line-height: 1.4; 
+      border-top: 1px solid #ddd; 
+      padding-top: 8px; 
+      page-break-inside: avoid;
+    }
     .note-title { font-weight: bold; width: 50px; flex-shrink: 0; }
     .note-list { list-style-type: none; padding-left: 0; margin: 0; flex-grow: 1; }
-    .note-list li { margin-bottom: 4px; display: flex; line-height: 1.4; }
+    .note-list li { margin-bottom: 3px; display: flex; line-height: 1.4; }
     .note-list li .bullet { width: 20px; font-weight: bold; flex-shrink: 0; }
 
     /* Signature Section Layout */
@@ -184,9 +209,10 @@
       display: flex; 
       justify-content: space-between; 
       align-items: flex-end; 
-      margin-top: 25px; 
+      margin-top: 24px; 
       padding: 0 10px; 
       position: relative;
+      page-break-inside: avoid;
     }
     .sig-left-empty { width: 33%; }
     .counter-sig { 
@@ -195,7 +221,7 @@
       font-weight: bold; 
       text-decoration: underline; 
       font-size: 12px; 
-      margin-top: 35px; /* Added top margin to move it down with space above */
+      margin-top: 25px;
     }
     .indiv-sig { 
       width: 33%; 
@@ -203,18 +229,18 @@
       font-weight: bold; 
       font-size: 12px; 
     }
-    .sig-line { display: inline-block; width: 150px; border-bottom: 1px solid #000; }
+    .sig-line { display: inline-block; width: 140px; border-bottom: 1px solid #000; }
 
     /* Action Buttons */
     .btn-add { background: #007bff; color: white; border: none; padding: 4px 10px; font-size: 11px; font-weight: bold; cursor: pointer; border-radius: 3px; }
-    .btn-remove { background: #dc3545; color: white; border: none; padding: 2px 6px; font-size: 10px; cursor: pointer; border-radius: 2px; }
-    .btn-submit { display: block; width: 297mm; margin: 0 auto 20px auto; padding: 12px; background: #28a745; color: white; border: none; font-size: 15px; font-weight: bold; cursor: pointer; border-radius: 4px; }
+    .btn-remove { background: #dc3545; color: white; border: none; padding: 2px 6px; font-size: 11px; cursor: pointer; border-radius: 2px; }
+    .btn-submit { display: block; width: 297mm; margin: 15px auto; padding: 12px; background: #28a745; color: white; border: none; font-size: 15px; font-weight: bold; cursor: pointer; border-radius: 4px; }
 
     /* Pure Vector Print Rules */
     @media print {
       @page { 
         size: A4 landscape; 
-        margin: 0mm; 
+        margin: 8mm 10mm; 
       }
       html, body { 
         background: white !important; 
@@ -224,14 +250,12 @@
       .no-print, .btn-add, .btn-remove, #photo-upload, .error-msg-text, .btn-submit { 
         display: none !important; 
       }
-      .page { 
+      .form-container { 
         border: none !important; 
         box-shadow: none !important; 
         margin: 0 !important; 
-        width: 297mm !important; 
-        padding: 10mm 12mm !important;
-        page-break-after: always !important;
-        page-break-inside: avoid !important;
+        width: 100% !important; 
+        padding: 0 !important;
       }
       .action-col { display: none !important; }
       
@@ -242,25 +266,34 @@
         -webkit-appearance: none !important;
       }
 
-      /* Main Form Input Box Borders Enabled in Print */
+      /* Print Specific Formatting: Remove borders for grid input fields */
       .grid input, 
-      .grid select { 
-        border: 1px solid #000 !important; 
+      .grid select,
+      .grid textarea { 
+        border: none !important; 
         background: transparent !important;
+        font-weight: bold !important;
+        text-decoration: underline !important;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
       }
+
       .phone-prefix { 
-        border: 1px solid #000 !important; 
-        border-right: none !important; 
-        background: #f8f9fa !important; 
+        border: none !important; 
+        background: transparent !important; 
+        height: 22px !important;
+        font-size: 11px !important;
       }
 
-      /* Keep Table Inputs Clean */
-      table td input, table td select {
-        border: none !important;
-      }
+      /* Compact sizing for tight PDF fitting */
+      .grid { gap: 6px 10px !important; }
+      th, td { padding: 3px 4px !important; font-size: 11px !important; }
+      td input, td select { height: 20px !important; font-size: 11px !important; border: none !important; font-weight: bold !important; text-decoration: underline !important; }
+      .field-group input, .field-group select, .field-group textarea { height: auto !important; font-size: 11px !important; min-height: 22px !important; }
+      .field-group label { font-size: 11px !important; }
+      .note-section { font-size: 10.5px !important; margin-top: 8px !important; }
+      .signature-section { margin-top: 18px !important; }
     }
   </style>
 </head>
@@ -268,117 +301,118 @@
 
 <form id="proforma-form-wrapper" onsubmit="validateAndSubmit(event)" novalidate>
 
-<div id="proforma-form">
+<div class="form-container" id="proforma-form">
   
-  <!-- PAGE 1 -->
-  <div class="page">
-    <div class="header-section">
-      <div class="header-title">
-        <h2>Particulars / Family Details Proforma</h2>
+  <!-- HEADER -->
+  <div class="header-section">
+    <div class="header-title">
+      <h2>Particulars / Family Details Proforma</h2>
+    </div>
+    <div class="photo-box-container">
+      <div class="photo-box" id="photo-preview">
+        <span>Paste 01 x Passport Size Photo *</span>
+        <input type="file" id="photo-upload" accept="image/*" class="no-print" required onchange="previewImage(event)">
       </div>
-      <div class="photo-box-container">
-        <div class="photo-box" id="photo-preview">
-          <span>Paste 01 x Passport Size Photo</span>
-          <input type="file" id="photo-upload" accept="image/*" class="no-print" onchange="previewImage(event)">
-        </div>
+    </div>
+  </div>
+  
+  <!-- PERSONAL PARTICULARS GRID -->
+  <div class="grid">
+    <div class="field-group"><label>Force no.:*</label><input type="text" maxlength="20" required oninput="resetFieldError(this)"></div>
+    <div class="field-group"><label>Rank/Desig:*</label><input type="text" maxlength="30" required oninput="resetFieldError(this)"></div>
+    <div class="field-group"><label>Name:*</label><input type="text" maxlength="40" required oninput="resetFieldError(this)"></div>
+    <div class="field-group"><label>Father's name:*</label><textarea rows="1" required oninput="resetFieldError(this)"></textarea></div>
+
+    <div class="field-group">
+      <label>Date of birth:*</label>
+      <input type="date" id="dob-field" required onchange="resetFieldError(this)">
+    </div>
+
+    <div class="field-group">
+      <label>Date of appt:*</label>
+      <input type="date" id="doa-field" required onchange="resetFieldError(this)">
+    </div>
+
+    <div class="field-group"><label>Qualification:*</label><input type="text" maxlength="30" required oninput="resetFieldError(this)"></div>
+    <div class="field-group"><label>Domicile:*</label><input type="text" maxlength="25" required oninput="resetFieldError(this)"></div>
+
+    <div class="field-group"><label>Religion:*</label><input type="text" maxlength="20" required oninput="resetFieldError(this)"></div>
+    <div class="field-group"><label>Sect:*</label><input type="text" maxlength="20" required oninput="resetFieldError(this)"></div>
+    <div class="field-group"><label>Caste:*</label><input type="text" maxlength="20" required oninput="resetFieldError(this)"></div>
+    
+    <div class="field-group">
+      <label>Cell no:*</label>
+      <div class="phone-input-group">
+        <span class="phone-prefix">+92</span>
+        <input type="text" maxlength="10" placeholder="3001234567" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); resetFieldError(this);">
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label>Emergency no:*</label>
+      <div class="phone-input-group">
+        <span class="phone-prefix">+92</span>
+        <input type="text" maxlength="10" placeholder="3001234567" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); resetFieldError(this);">
       </div>
     </div>
     
-    <div class="grid">
-      <div class="field-group"><label>Force No.:*</label><input type="text" maxlength="20" required oninput="resetFieldError(this)"></div>
-      <div class="field-group"><label>Rank/Desig:*</label><input type="text" maxlength="30" required oninput="resetFieldError(this)"></div>
-      <div class="field-group"><label>Name:*</label><input type="text" maxlength="40" required oninput="resetFieldError(this)"></div>
-      <div class="field-group"><label>Father's Name:*</label><input type="text" maxlength="40" required oninput="resetFieldError(this)"></div>
+    <div class="field-group">
+      <label>CNIC no:*</label>
+      <input type="text" maxlength="13" placeholder="Without dash" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); resetFieldError(this);">
+    </div>
+    
+    <div class="field-group"><label>Next of kin:*</label><input type="text" maxlength="20" required oninput="resetFieldError(this)"></div>
+    <div class="field-group"><label>Station:*</label><input type="text" maxlength="30" required oninput="resetFieldError(this)"></div>
 
-      <div class="field-group">
-        <label>Date of Birth:*</label>
-        <input type="date" id="dob-field" required onchange="resetFieldError(this)">
-      </div>
+    <div class="field-group"><label>Force card no.:*</label><input type="text" maxlength="20" required oninput="resetFieldError(this)"></div>
+    <div class="field-group half-width"><label>Home/Option station:*</label><input type="text" maxlength="40" required oninput="resetFieldError(this)"></div>
+    <div class="field-group"><label>Living status:*</label><select required onchange="resetFieldError(this)"><option value="">Select</option><option value="In">In</option><option value="Out">Out</option></select></div>
 
-      <div class="field-group">
-        <label>Date of Appt:*</label>
-        <input type="date" id="doa-field" required onchange="resetFieldError(this)">
-      </div>
-
-      <div class="field-group"><label>Qualification:*</label><input type="text" maxlength="30" required oninput="resetFieldError(this)"></div>
-      <div class="field-group"><label>Domicile:*</label><input type="text" maxlength="25" required oninput="resetFieldError(this)"></div>
-
-      <div class="field-group"><label>Religion:*</label><input type="text" maxlength="20" required oninput="resetFieldError(this)"></div>
-      <div class="field-group"><label>Sect:*</label><input type="text" maxlength="20" required oninput="resetFieldError(this)"></div>
-      <div class="field-group"><label>Caste:*</label><input type="text" maxlength="20" required oninput="resetFieldError(this)"></div>
-      
-      <div class="field-group">
-        <label>Cell No:*</label>
-        <div class="phone-input-group">
-          <span class="phone-prefix">+92</span>
-          <input type="text" maxlength="10" placeholder="3001234567" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); resetFieldError(this);">
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label>Emergency No:*</label>
-        <div class="phone-input-group">
-          <span class="phone-prefix">+92</span>
-          <input type="text" maxlength="10" placeholder="3001234567" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); resetFieldError(this);">
-        </div>
-      </div>
-      
-      <div class="field-group">
-        <label>CNIC No:*</label>
-        <input type="text" maxlength="13" placeholder="Without dash" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); resetFieldError(this);">
-      </div>
-      
-      <div class="field-group"><label>Next of Kin:*</label><input type="text" maxlength="20" required oninput="resetFieldError(this)"></div>
-      <div class="field-group"><label>Station:*</label><input type="text" maxlength="30" required oninput="resetFieldError(this)"></div>
-
-      <div class="field-group"><label>Force Card No.:*</label><input type="text" maxlength="20" required oninput="resetFieldError(this)"></div>
-      <div class="field-group half-width"><label>Home/Option Station:*</label><input type="text" maxlength="40" required oninput="resetFieldError(this)"></div>
-      <div class="field-group"><label>Living Status:*</label><select required onchange="resetFieldError(this)"><option value="">Select</option><option value="In">In</option><option value="Out">Out</option></select></div>
-
-      <div class="field-group"><label>Nature of Job:*</label><input type="text" maxlength="30" required oninput="resetFieldError(this)"></div>
-      
-      <div class="field-group half-width">
-        <label>Present Address:*</label>
-        <input type="text" maxlength="100" placeholder="Max 100 characters" required oninput="resetFieldError(this)">
-      </div>
-      
-      <div class="field-group">
-        <label>Personnel No:*</label>
-        <input type="text" maxlength="10" placeholder="10 Digits" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); resetFieldError(this);">
-      </div>
-
-      <div class="field-group half-width">
-        <label>Permanent Address:*</label>
-        <input type="text" maxlength="100" placeholder="Max 100 characters" required oninput="resetFieldError(this)">
-      </div>
-      
-      <div class="field-group">
-        <label>Marital Status:*</label>
-        <select required onchange="resetFieldError(this)">
-          <option value="">Select</option>
-          <option value="Single">Single</option>
-          <option value="Married">Married</option>
-          <option value="Widow">Widow</option>
-          <option value="Widower">Widower</option>
-        </select>
-      </div>
-      <div class="field-group"><label>Family System:*</label><select required onchange="resetFieldError(this)"><option value="">Select</option><option value="Joint">Joint</option><option value="Independent">Independent</option></select></div>
-
-      <div class="field-group half-width">
-        <label>Email:*</label>
-        <div class="email-container">
-          <input type="text" id="email-field" maxlength="40" placeholder="e.g. name@gmail.com" required oninput="resetEmailError(); resetFieldError(this);">
-          <span id="email-error-text" class="error-msg-text">Email format is incorrect</span>
-        </div>
-      </div>
-      <div class="field-group half-width"><label>Prof. Skills:*</label><input type="text" maxlength="50" required oninput="resetFieldError(this)"></div>
+    <div class="field-group"><label>Nature of job:*</label><input type="text" maxlength="30" required oninput="resetFieldError(this)"></div>
+    
+    <div class="field-group half-width">
+      <label>Present address:*</label>
+      <textarea rows="1" required oninput="resetFieldError(this)"></textarea>
+    </div>
+    
+    <div class="field-group">
+      <label>Personnel no:*</label>
+      <input type="text" maxlength="10" placeholder="10 Digits" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); resetFieldError(this);">
     </div>
 
-    <!-- Section Separator Line -->
-    <hr class="section-divider">
+    <div class="field-group half-width">
+      <label>Permanent address:*</label>
+      <textarea rows="1" required oninput="resetFieldError(this)"></textarea>
+    </div>
+    
+    <div class="field-group">
+      <label>Marital status:*</label>
+      <select required onchange="resetFieldError(this)">
+        <option value="">Select</option>
+        <option value="Single">Single</option>
+        <option value="Married">Married</option>
+        <option value="Widow">Widow</option>
+        <option value="Widower">Widower</option>
+      </select>
+    </div>
+    <div class="field-group"><label>Family system:*</label><select required onchange="resetFieldError(this)"><option value="">Select</option><option value="Joint">Joint</option><option value="Independent">Independent</option></select></div>
 
+    <div class="field-group half-width">
+      <label>Email:*</label>
+      <div class="email-container">
+        <input type="text" id="email-field" maxlength="40" placeholder="e.g. name@gmail.com" required oninput="resetEmailError(); resetFieldError(this);">
+        <span id="email-error-text" class="error-msg-text">Email format is incorrect</span>
+      </div>
+    </div>
+    <div class="field-group half-width"><label>Prof. skills:*</label><input type="text" maxlength="50" required oninput="resetFieldError(this)"></div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- FAMILY MEMBERS TABLE SECTION -->
+  <div class="table-section">
     <div class="table-header-container">
-      <h3>Family Members Details</h3>
+      <h3>Family members details</h3>
       <button type="button" class="btn-add no-print" onclick="addRow('family-tbody')">+ Add Row</button>
     </div>
     <table>
@@ -388,7 +422,7 @@
           <th style="width: 25%;">Full name</th>
           <th style="width: 14%;">Relation</th>
           <th style="width: 12%;">Date of birth</th>
-          <th style="width: 12%;">Date of Expiry</th>
+          <th style="width: 12%;">Date of expiry</th>
           <th style="width: 12%;">Occupation</th>
           <th style="width: 10%;">Status</th>
           <th style="width: 10%;">Remarks</th>
@@ -399,12 +433,9 @@
     </table>
   </div>
 
-  <!-- PAGE 2 -->
-  <div class="page">
-    <!-- Section Separator Line -->
-    <hr class="section-divider" style="margin-top: 0;">
-
-    <div class="table-header-container">
+  <!-- IN-LAWS TABLE SECTION (DIRECTLY ATTACHED BELOW) -->
+  <div class="table-section">
+    <div class="table-header-container" style="margin-top: 10px;">
       <h3>In-Law (s) details</h3>
       <button type="button" class="btn-add no-print" onclick="addRow('inlaws-tbody')">+ Add Row</button>
     </div>
@@ -415,7 +446,7 @@
           <th style="width: 25%;">Full name</th>
           <th style="width: 14%;">Relation</th>
           <th style="width: 12%;">Date of birth</th>
-          <th style="width: 12%;">Date of Expiry</th>
+          <th style="width: 12%;">Date of expiry</th>
           <th style="width: 12%;">Occupation</th>
           <th style="width: 10%;">Status</th>
           <th style="width: 10%;">Remarks</th>
@@ -424,31 +455,33 @@
       </thead>
       <tbody id="inlaws-tbody"></tbody>
     </table>
+  </div>
 
-    <div class="note-section">
-      <div style="display: flex;">
-        <span class="note-title">Note:</span>
-        <ul class="note-list">
-          <li><span class="bullet">a.</span><span>Information must cover father, Mother, Brothers, Sisters, Wife, 2<sup>nd</sup> Wife, Sons, Daughters, Step Father, Step Mother, Step Brothers, Step Sisters, & Adoption (if any) In-laws</span></li>
-          <li><span class="bullet">b.</span><span>Nature of Job must be written i.e. operational duty or admin duty, (Mention Section/Branch as well).</span></li>
-          <li><span class="bullet">c.</span><span>Information about deceased family member(s) must be mentioned with the date of expiry or death. (If Any)</span></li>
-          <li><span class="bullet">d.</span><span>Indication of Next of Kin may also be made in the remark's column with contact number.</span></li>
-          <li><span class="bullet">e.</span><span>Mention if any family member if Serving in this with Force Number and present station of posting.</span></li>
-          <li><span class="bullet">f.</span><span>In case of any family member is serving other than this (Department, appointment, present posting station) must be mentioned.</span></li>
-          <li><span class="bullet">g.</span><span>Attach neat & Clean (readable) photo copy of CNIC, Force card, last educational certificate. (Last degree along with mark sheet), <b>B. Form of children</b></span></li>
-        </ul>
-      </div>
+  <!-- NOTES SECTION -->
+  <div class="note-section">
+    <div style="display: flex;">
+      <span class="note-title">Note:</span>
+      <ul class="note-list">
+        <li><span class="bullet">a.</span><span>Information must cover father, Mother, Brothers, Sisters, Wife, 2<sup>nd</sup> Wife, Sons, Daughters, Step Father, Step Mother, Step Brothers, Step Sisters, & Adoption (if any) In-laws</span></li>
+        <li><span class="bullet">b.</span><span>Nature of Job must be written i.e. operational duty or admin duty, (Mention Section/Branch as well).</span></li>
+        <li><span class="bullet">c.</span><span>Information about deceased family member(s) must be mentioned with the date of expiry or death. (If Any)</span></li>
+        <li><span class="bullet">d.</span><span>Indication of Next of Kin may also be made in the remark's column with contact number.</span></li>
+        <li><span class="bullet">e.</span><span>Mention if any family member if Serving in this with Force Number and present station of posting.</span></li>
+        <li><span class="bullet">f.</span><span>In case of any family member is serving other than this (Department, appointment, present posting station) must be mentioned.</span></li>
+        <li><span class="bullet">g.</span><span>Attach neat & Clean (readable) photo copy of CNIC, Force card, last educational certificate. (Last degree along with mark sheet), <b>B. Form of children</b></span></li>
+      </ul>
     </div>
+  </div>
 
-    <div class="signature-section">
-      <div class="sig-left-empty"></div>
-      <div class="counter-sig">
-        COUNTER SIGNATURE
-      </div>
-      <div class="indiv-sig">
-        <div><u>Signature of Individual</u></div>
-        <div style="margin-top: 8px;">Dated: <span class="sig-line"></span></div>
-      </div>
+  <!-- SIGNATURE SECTION -->
+  <div class="signature-section">
+    <div class="sig-left-empty"></div>
+    <div class="counter-sig">
+      COUNTER SIGNATURE
+    </div>
+    <div class="indiv-sig">
+      <div><u>Signature of Individual</u></div>
+      <div style="margin-top: 8px;">Dated: <span class="sig-line"></span></div>
     </div>
   </div>
 
@@ -477,7 +510,7 @@
           <option value="Independent">Independent</option>
         </select>
       </td>
-      <td><input type="text" maxlength="25" style="text-align: left;" required oninput="resetFieldError(this)"></td>
+      <td><input type="text" style="text-align: left;" oninput="resetFieldError(this)"></td>
       <td class="action-col no-print" style="text-align: center;"><button type="button" class="btn-remove" onclick="removeRow(this, '${tbodyId}')">X</button></td>
     `;
     tbody.appendChild(row);
@@ -498,13 +531,18 @@
   }
 
   function previewImage(event) {
+    const photoBox = document.getElementById('photo-preview');
+    photoBox.classList.remove('input-error');
+    
     const reader = new FileReader();
     reader.onload = function() {
-      const output = document.getElementById('photo-preview');
+      const existingImg = photoBox.querySelector('img');
+      if(existingImg) existingImg.remove();
+      
       const img = document.createElement('img');
       img.src = reader.result;
       img.alt = "Photo";
-      output.appendChild(img);
+      photoBox.appendChild(img);
     }
     if (event.target.files[0]) {
       reader.readAsDataURL(event.target.files[0]);
@@ -526,12 +564,22 @@
     event.preventDefault();
 
     const form = document.getElementById('proforma-form-wrapper');
-    const requiredInputsAndSelects = form.querySelectorAll('input[required]:not([type="file"]), select[required]');
+    const requiredInputsAndSelects = form.querySelectorAll('input[required]:not([type="file"]), select[required], textarea[required]');
     let isValid = true;
     let firstInvalidElement = null;
 
     // Reset previous errors
-    form.querySelectorAll('input:not([type="file"]), select').forEach(el => el.classList.remove('input-error'));
+    form.querySelectorAll('input:not([type="file"]), select, textarea').forEach(el => el.classList.remove('input-error'));
+    const photoBox = document.getElementById('photo-preview');
+    photoBox.classList.remove('input-error');
+
+    // Validate Photo Upload
+    const photoUploadInput = document.getElementById('photo-upload');
+    if (!photoUploadInput.files || photoUploadInput.files.length === 0) {
+      isValid = false;
+      photoBox.classList.add('input-error');
+      if (!firstInvalidElement) firstInvalidElement = photoUploadInput;
+    }
 
     // Validate required fields
     requiredInputsAndSelects.forEach(el => {
@@ -555,8 +603,27 @@
       if (!firstInvalidElement) firstInvalidElement = emailField;
     }
 
+    // Validate DOB and DOA (Minimum 18 years difference)
+    const dobInput = document.getElementById('dob-field');
+    const doaInput = document.getElementById('doa-field');
+    if (dobInput.value && doaInput.value) {
+      const dob = new Date(dobInput.value);
+      const doa = new Date(doaInput.value);
+      
+      let minDoaDate = new Date(dob);
+      minDoaDate.setFullYear(minDoaDate.getFullYear() + 18);
+
+      if (doa < minDoaDate) {
+        isValid = false;
+        doaInput.classList.add('input-error');
+        alert('Ghalti: Date of Appt, Date of Birth se kam se kam 18 saal baad ki honi chahiye!');
+        doaInput.focus();
+        return false;
+      }
+    }
+
     if (!isValid) {
-      alert('Khabardar: Tamam required fields aur Table details fill karna lazmi hy! Khali fields ko red border se highlight kar diya gaya hy.');
+      alert('Khabardar: Passport size photo upload karna aur tamam required fields/table details fill karna lazmi hy!');
       if (firstInvalidElement) firstInvalidElement.focus();
       return false;
     }
